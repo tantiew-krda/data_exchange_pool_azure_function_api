@@ -13,7 +13,7 @@ export async function data_exchange_pool_api(
 
 	const name = request.query.get("name") || (await request.text()) || "world";
 
-	return { body: `Hello, ${name}!` };
+	return { body: `Hello, ${name}, Auto Deploy!` };
 }
 
 app.http("data_exchange_pool_api", {
