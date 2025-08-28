@@ -1,8 +1,11 @@
 import { app } from "@azure/functions";
 import { getMockUser } from "./functions/getMockUser";
-import { blobList } from "./functions/blobList";
-import { uploadCsv } from "./functions/upload";
-import { downloadFile } from "./functions/download";
+
+// Import blob function
+import { blobList } from "./functions/blob/blobList";
+import { uploadCsv } from "./functions/blob/upload";
+import { downloadCsv } from "./functions/blob/download";
+import { deleteCsv } from "./functions/blob/delete";
 
 app.setup({
 	enableHttpStream: true,
@@ -30,9 +33,16 @@ app.http("uploadCsv", {
 	handler: uploadCsv,
 });
 
-app.http("downloadFile", {
+app.http("downloadCsv", {
 	methods: ["GET"],
 	authLevel: "function",
-	route: "downloadFile",
-	handler: downloadFile,
+	route: "downloadCsv",
+	handler: downloadCsv,
+});
+
+app.http("deleteCsv", {
+	methods: ["DELETE"],
+	authLevel: "function",
+	route: "deleteCsv",
+	handler: deleteCsv,
 });
